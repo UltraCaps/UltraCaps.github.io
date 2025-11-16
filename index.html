@@ -1,418 +1,1246 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Produtos Premium - UltraCaps</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <title>ULTRACAPS BRASIL - PRODUTOS PREMIUM</title>
+    <!-- Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Font (Montserrat - Fonte Premium) --><link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Lucide Icons para Fitoterápicos/Nutracêuticos --><script src="https://unpkg.com/lucide@latest"></script>
+    
     <style>
+        /* Base Styles */
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f0f2f5;
-            background-image: radial-gradient(circle at top left, rgba(255,255,255,0.2), transparent), radial-gradient(circle at bottom right, rgba(255,255,255,0.2), transparent);
+            font-family: 'Montserrat', sans-serif;
+            scroll-behavior: smooth;
         }
+
+        /* Utility Class to hide content robustly */
+        .content-hidden {
+            display: none;
+        }
+
+        /* Custom Gold/Amber Styling for Headers and Icons */
         .text-gold-gradient {
-            background: linear-gradient(145deg, #FDE047, #D4AF37, #B8860B);
+            background: linear-gradient(145deg, #fcd34d, #d97706, #b45309);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-fill-color: transparent;
-            padding-bottom: 2px; /* Fix for gradient clipping */
         }
-        .text-metallic-realistic {
-            background: linear-gradient(145deg, #e2e8f0, #94a3b8, #64748b); /* Tons de cinza metálico */
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-fill-color: transparent;
-            text-shadow: 1px 2px 3px rgba(0,0,0,0.25); /* Sombra mais visível para efeito 3D */
-        }
+        /* --- FUNDO PREMIUM PARA OS CABEÇALHOS DOS CARDS (Clean/White/Gray-50) --- */
         .card-header-bg {
-             background-color: #111827; /* bg-gray-900 */
+            background-color: #f9fafb; /* bg-gray-50 */
+            border-bottom: 1px solid #f3f4f6; /* border-gray-100 */
         }
-        /* Estilos para a animação de scroll */
-        .scroll-animate {
-            opacity: 0;
-            transform: translateY(40px) scale(0.95);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .scroll-animate.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-        /* Estilos para o efeito 3D */
-        .card-tilt {
-            transition: transform 0.1s linear, box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-style: preserve-3d;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.1);
-        }
-        .card-tilt:hover {
-             box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
-        }
-        /* Estilos dos botões de quantidade */
         .quantity-btn {
-            background-color: #f3f4f6; /* bg-gray-100 */
+            background-color: #f3f4f6;
             border: 2px solid transparent;
             transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        }
+        .quantity-btn:hover {
+            background-color: #fce3a7;
         }
         .quantity-btn.active {
-            border-color: #D4AF37;
+            border-color: #d97706; /* Active border: Amber-700 */
             background-color: #fff;
-            box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+            box-shadow: 0 0 8px rgba(217, 119, 6, 0.4);
         }
-        /* Banner de permissão do giroscópio */
-        #gyro-banner {
-            transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+        
+        /* --- ESTILIZAÇÃO DO PREÇO (TEXTO COM GRADIENTE E MONTSERRAT BLACK) --- */
+        .price-display-container {
+            /* Garante que o container ocupe o espaço */
+            display: flex;
+            align-items: center;
+            /* Centraliza o conteúdo horizontalmente */
+            justify-content: center; 
+            height: 100%; 
+            width: 100%; 
+            /* Transição suave para o efeito de "aparecer" */
+            transition: opacity 0.3s ease-in-out;
+            padding-right: 0; 
+        }
+
+        .price-text {
+            /* Classe base para o texto do preço/placeholder */
+            font-family: 'Montserrat', sans-serif; 
+            font-weight: 900; /* Black */
+            font-size: 1.5rem; /* Tamanho do texto */
+            white-space: nowrap; 
+            
+            /* Aplicando o gradiente dourado (SEM MOLDUDA) */
+            background-image: linear-gradient(145deg, #fcd34d, #d97706, #b45309);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* Estilo para destacar a observação de preço - Cor Dourada/Âmbar */
+        .price-note {
+            background-color: #fff7ed;
+            border-left: 4px solid #d97706;
+            padding: 0.5rem 0.75rem;
+            margin-bottom: 0.5rem; 
+            font-weight: 600;
+            color: #d97706;
+            border-radius: 0.5rem;
+            text-align: left;
+        }
+
+        /* --- Botões de seleção de formato com fundo Branco/Clean (premium) --- */
+        .product-format-card {
+            border: 2px solid #fcd34d;
+            background-color: #ffffff; 
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.06);
+            transition: all 0.3s;
+        }
+        .product-format-card:hover {
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.06);
+            transform: translateY(-2px);
+            border-color: #d97706;
+        }
+
+        /* Estilos específicos para Pastilha de Goma - Base Vermelha/Rosa */
+        .gummy-card-header-bg {
+            background-color: #fee2e2; /* Light red/pink background for gummy cards */
+            border-bottom: 1px solid #fecaca; /* border-red-200 */
+        }
+        .gummy-text-gradient {
+            background: linear-gradient(145deg, #f87171, #dc2626, #b91c1c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* --- Print Styles (Ensures ALL content appears for PDF export) --- */
+        @media print {
+            .content-hidden {
+                display: block !important;
+                visibility: visible !important;
+                height: auto !important;
+                overflow: visible !important;
+            }
+            body {
+                background-color: #ffffff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            section, main {
+                page-break-inside: avoid;
+            }
         }
     </style>
 </head>
-<body class="text-gray-800 p-4 sm:p-6 md:p-8">
+<body class="bg-white text-gray-800 antialiased">
 
-    <!-- Banner para permissão do Giroscópio -->
-    <div id="gyro-banner" class="hidden fixed bottom-4 left-1/2 -translate-x-1/2 w-11/12 max-w-md bg-white p-4 rounded-2xl shadow-2xl z-50 transform translate-y-20 opacity-0">
-        <div class="flex items-center">
-            <div class="mr-4">
-                <i data-lucide="smartphone-nfc" class="w-12 h-12 text-gold-gradient"></i>
-            </div>
-            <div>
-                <h4 class="font-bold text-gray-800">Experiência Imersiva</h4>
-                <p class="text-sm text-gray-600">Ative o efeito 3D para interagir com a página usando o movimento do seu celular.</p>
-            </div>
-        </div>
-        <div class="mt-4 flex gap-2">
-            <button id="activate-gyro" class="w-full bg-gray-800 text-white font-bold py-2 px-4 rounded-lg hover:bg-gray-700 transition-colors">Ativar</button>
-            <button id="dismiss-gyro" class="w-1/3 bg-gray-200 text-gray-700 font-bold py-2 px-4 rounded-lg hover:bg-gray-300 transition-colors">Agora não</button>
-        </div>
-    </div>
-
-    <div class="max-w-7xl mx-auto">
-        <!-- Cabeçalho -->
-        <header class="text-center mb-12">
-            <!-- Logo Apenas Texto -->
-            <div class="mb-4">
-                 <h2 class="text-5xl font-extrabold text-gold-gradient">UltraCaps</h2>
-            </div>
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 tracking-tight">Produtos Premium</h1>
-            <p class="mt-3 text-lg text-gray-600">Preços e Condições para Nossos Produtos Exclusivos</p>
-        </header>
-
-        <!-- Grade de Produtos -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    <!-- HOME/HEADER: Seção de Apresentação e Escolha de Categoria --><header id="home-section" class="bg-white text-gray-900 py-16 border-b border-gray-200">
+        <div class="container mx-auto px-6 text-center">
+            <!-- Título principal em dourado vibrante --><h1 class="text-4xl md:text-5xl font-black uppercase tracking-wider text-amber-600">
+                ULTRACAPS BRASIL
+            </h1>
+            <p class="text-lg md:text-xl text-gray-600 mt-4 max-w-3xl mx-auto mb-10">
+                Desenvolvimento, tecnologia e excelência em produtos de alto desempenho.
+            </p>
             
-            <!-- Card Emagrecedor -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Emagrecedor</h2>
-                    <i data-lucide="leaf" class="w-10 h-10 text-gold-gradient opacity-80"></i>
-                </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 19,22"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 36,31"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 59,03"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
-                    </div>
-                </div>
-            </div>
+            <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-8 uppercase">
+                Escolha a sua linha de interesse
+            </h2>
 
-            <!-- Card Libido -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Libido</h2>
-                    <i data-lucide="heart" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+            <!-- Cartões de Opções --><div class="flex flex-wrap justify-center gap-6 max-w-4xl mx-auto">
+                
+                <!-- Cartão 1: Fitoterápicos --><div class="product-card w-full sm:w-56 p-6 rounded-xl border border-amber-600/50 bg-amber-50 shadow-xl cursor-pointer transition transform hover:scale-[1.02] duration-200 flex flex-col items-center justify-center text-center" 
+                    onclick="showSection('fitoterapicos-section')">
+                    <p class="text-4xl mb-4">🌿</p>
+                    <h3 class="text-xl font-bold text-amber-700">Fitoterápicos</h3>
+                    <p class="text-sm text-gray-600 mt-2">Fórmulas naturais e extratos vegetais.</p>
+                    <div class="w-full mt-4 bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                        Ver Catálogo
+                    </div>
                 </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 18,44"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 33,12"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 57,06"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
-                    </div>
-                    <p class="text-sm text-gray-500 mt-4 pt-3 border-t border-gray-200">*Versão Masculina: acréscimo de R$ 2,00 por pote.</p>
-                </div>
-            </div>
 
-            <!-- Card Dor -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Dor</h2>
-                    <i data-lucide="shield-plus" class="w-10 h-10 text-gold-gradient opacity-80"></i>
-                </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 17,01"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 30,38"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 54,97"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
+                <!-- Cartão 2: Nutracêuticos --><div class="product-card w-full sm:w-56 p-6 rounded-xl border border-amber-600/50 bg-amber-50 shadow-xl cursor-pointer transition transform hover:scale-[1.02] duration-200 flex flex-col items-center justify-center text-center" 
+                    onclick="showSection('nutraceuticos-section')">
+                    <p class="text-4xl mb-4">💊</p>
+                    <h3 class="text-xl font-bold text-amber-700">Nutracêuticos</h3>
+                    <p class="text-sm text-gray-600 mt-2">Suplementos e vitaminas de alta performance.</p>
+                    <div class="w-full mt-4 bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                        Ver Catálogo
                     </div>
                 </div>
-            </div>
 
-            <!-- Card Nootrópico -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-2xl font-bold text-gold-gradient">Nootrópico</h2>
-                        <i data-lucide="brain-circuit" class="w-10 h-10 text-gold-gradient opacity-80"></i>
-                    </div>
-                    <p class="text-sm text-gray-400 mt-1">Foco e Concentração</p>
-                </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 22,68"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 38,03"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 62,96"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
+                <!-- Cartão 3: COSMÉTICOS --><div class="product-card w-full sm:w-56 p-6 rounded-xl border border-amber-600/50 bg-amber-50 shadow-xl cursor-pointer transition transform hover:scale-[1.02] duration-200 flex flex-col items-center justify-center text-center" 
+                    onclick="showSection('cosmetics-section')">
+                    <p class="text-4xl mb-4">🧴</p>
+                    <h3 class="text-xl font-bold text-amber-700">Cosméticos</h3>
+                    <p class="text-sm text-gray-600 mt-2">Linha capilar, corporal e facial.</p>
+                    <div class="w-full mt-4 bg-amber-600 text-white font-semibold py-2 px-4 rounded-lg shadow-md">
+                        Ver Catálogo
                     </div>
                 </div>
-            </div>
 
-            <!-- Card Menopausa -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Menopausa</h2>
-                    <i data-lucide="flower-2" class="w-10 h-10 text-gold-gradient opacity-80"></i>
-                </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 17,55"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 32,41"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 54,59"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
-                    </div>
-                </div>
             </div>
+        </div>
+    </header>
 
-            <!-- Card Ansiedade -->
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Ansiedade</h2>
-                    <i data-lucide="wind" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+    <!-- CONTEÚDO PRINCIPAL (INICIALMENTE ESCONDIDO) --><div id="content-wrapper" class="content-hidden">
+        
+        <!-- SECÇÃO 1: CATÁLOGO DE COSMÉTICOS (MANTIDO) --><div id="cosmetics-section" class="content-hidden pt-8">
+            <main class="container mx-auto max-w-5xl p-6 md:p-12">
+                
+                <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 uppercase pt-12">
+                    Linha Cosmética - Descrições Completas
+                </h2>
+
+                <!-- Container da Lista de Produtos (Conteúdo Cosmético Mantido) --><div>
+                    <!-- Categoria 1: Reparador de Pontas --><section id="categoria-1" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            1. Reparador de Pontas (10 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Reparador Tradicional –</strong> Sela pontas duplas, controla o frizz e confere brilho imediato.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Nutritivo –</strong> Repõe lipídios com óleos (Argan/Coco); combate o ressecamento das pontas.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Reconstrutor –</strong> Contém queratina; fortalece a fibra e previne a quebra.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Termoprotetor –</strong> Cria um filme protetor; blinda os fios do calor de secadores e chapinhas.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Antifrizz –</strong> Ação disciplinante; bloqueia a umidade e alinha os fios rebeldes.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Iluminador (Gloss) –</strong> Efeito de brilho espelhado; toque leve e sedoso.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Antioxidante –</strong> Com Vitamina E; protege contra danos UV e poluição.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Noturno –</b> Tratamento nutritivo de absorção lenta; repara os fios durante o sono.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Premium (Sérum) –</strong> Blend de silicones nobres; toque aveludado e alta performance.</li>
+                            <li><strong class="font-semibold text-gray-900">Reparador Vegano –</b> Fórmula 100% vegetal; usa silicones vegetais (como esqualano).</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 2: Shampoo --><section id="categoria-2" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            2. Shampoo (15 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Shampoo Hidratante –</strong> Limpeza suave; repõe umidade com Pantenol ou Aloe Vera.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Nutritivo –</strong> Limpa e nutre; fórmula rica em óleos e manteigas vegetais.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Reconstrutor –</strong> Repõe massa capilar; com queratina e aminoácidos para fios danificados.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Fortalecedor –</strong> Aumenta a resistência da fibra; ideal para cabelos fracos e quebradiços.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Antiqueda –</strong> Estimula o bulbo capilar; ativos como Cafeína, Biotina ou Jaborandi.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Anticaspa –</b> Ação antifúngica e seborreguladora; alivia a coceira e descamação.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Controle de Oleosidade –</strong> Limpeza purificante; regula o sebo sem ressecar as pontas.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Pós-Química –</strong> Limpeza restauradora; repara danos e prolonga o efeito de químicas.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Matizador (Violeta) –</strong> Neutraliza tons amarelados; ideal para cabelos loiros e grisalhos.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Cachos e Ondas –</strong> Limpeza suave (Low Poo); define e hidrata sem pesar.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Liso e Disciplinante –</strong> Efeito antifrizz; promove alinhamento e sela cutículas.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Detox –</b> Remove impurezas profundas e poluição; com argila verde ou mentol.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Antirresíduo –</strong> Limpeza profunda (pH alcalino); abre cutículas para tratamentos.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Co-wash –</b> Limpeza sem espuma (sem sulfato); condiciona e limpa em um passo.</li>
+                            <li><strong class="font-semibold text-gray-900">Shampoo Infantil –</strong> Fórmula suave (pH neutro); não arde os olhos.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 3: Condicionador --><section id="categoria-3" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            3. Condicionador (14 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Condicionador Hidratante –</strong> Desembaraça instantaneamente; confere maciez e leveza.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Nutritivo –</strong> Sela cutículas com lipídios; combate o frizz e dá brilho.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Reconstrutor –</b> Repara a estrutura interna do fio; devolve força e elasticidade.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Fortalecedor –</strong> Previne a quebra; sela as pontas e melhora a resistência.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Antiqueda –</strong> Complementa o tônico; fortalece o comprimento do fio.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Liso e Alinhado –</strong> Efeito disciplinante; prolonga o efeito liso e sela cutículas.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Cachos Definidos –</strong> Promove emoliência e definição; controla o frizz.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Matizador –</strong> Sela e neutraliza o tom; evita o ressecamento de fios loiros.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Pós-Química –</strong> Sela o tratamento químico; reconstrói e protege a cor.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Detox –</b> Ação refrescante e purificante; ideal para couro cabeludo oleoso.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador pH Balanceado –</strong> Sela cutículas pós-shampoo; restaura o brilho natural.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Leave-in –</strong> Proteção sem enxágue; protege do sol e do calor.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Multifuncional –</b> Ação rápida (3 min); hidrata, nutre e repara.</li>
+                            <li><strong class="font-semibold text-gray-900">Condicionador Vegano –</strong> Com manteigas vegetais; alto poder emoliente e sustentável.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 4: Máscara Capilar --><section id="categoria-4" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            4. Máscara Capilar (14 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Máscara de Hidratação –</strong> Reposição hídrica intensiva; devolve viço e maciez.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara de Nutrição –</strong> Reposição lipídica (óleos); combate o ressecamento e o frizz.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara de Reconstrução –</strong> Reposição de massa (queratina); reverte danos químicos e elásticos.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Acidificante –</strong> Reequilibra o pH (baixo); sela as cutículas pós-química.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Pós-Química –</b> Tratamento regenerador; prolonga a durabilidade de progressivas e colorações.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Fortalecedora –</strong> Foco em Biotina e Pantenol; reduz a quebra e fortalece o fio.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Antiemborrachamento –</b> Ação "stop quebra" imediata; para fios elásticos e danificados.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Matizadora –</strong> Tratamento e cor; neutraliza o amarelo enquanto hidrata.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Detox (Argila) –</b> Purifica o couro cabeludo; controla a oleosidade e estimula a circulação.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Brilho Espelhado –</strong> Sela cutículas e alinha a fibra; efeito gloss de longa duração.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Cachos e Ondas –</strong> Nutrição e definição; modela a curvatura sem pesar.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Antifrizz –</b> Ação disciplinante intensiva; alinhamento e redução de volume.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Termoprotetora –</b> Proteção ativada pelo calor; facilita a escovação.</li>
+                            <li><strong class="font-semibold text-gray-900">Máscara Restauradora Noturna –</b> Tratamento "overnight"; age durante o sono sem manchar.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 5: Tônico Capilar --><section id="categoria-5" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            5. Tônico Capilar (10 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Tônico Antiqueda –</strong> Foco no bulbo; estimula a circulação e a ancoragem do fio.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Fortalecedor –</strong> Aumenta a densidade e espessura; ideal para cabelos ralos.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Anticaspa –</b> Ação antifúngica e seborreguladora; alivia a coceira e descamação.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Controle de Oleosidade –</strong> Regula a produção de sebo; sensação de limpeza prolongada.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Crescimento Acelerado –</strong> Com Biotina e Cafeína; nutre o folículo para acelerar o crescimento.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Detox –</b> Oxigena o couro cabeludo; remove resíduos de poluição e química.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Calmante –</b> Para couro cabeludo sensível; alivia vermelhidão e irritação.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Pós-Química –</b> Protege e acalma o couro cabeludo após procedimentos.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Multifuncional –</strong> Vitamínico; nutre, protege e fortalece o uso diário.</li>
+                            <li><strong class="font-semibold text-gray-900">Tônico Vegano –</b> Com extratos botânicos (Jaborandi/Alecrim); estímulo 100% natural.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 6: Perfume Capilar --><section id="categoria-6" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            6. Perfume Capilar (5% a 22%)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Perfume Capilar (Não Bifásico) –</strong> Brilho instantâneo e neutralizador de odores; toque seco.</li>
+                            <li><strong class="font-semibold text-gray-900">Perfume Capilar Bifásico –</b> Fase aquosa (perfume) + Fase oleosa (nutrição); perfuma e trata.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 7: Perfume Corporal --><section id="categoria-7" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            7. Perfume Corporal (10 tipos, 5% a 35%)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Perfume Corporal Ultracaps –</strong> Desenvolvido com as mesmas essências de perfumes importados das grandes marcas internacionais, oferecendo alta qualidade, fixação e sofisticação em cada fragrância.</li>
+                            <li>Disponível em concentrações de 5% a 35%, permite personalização total de intensidade e estilo olfativo.</li>
+                            <li>Pode ser formulado em diversas famílias olfativas: floral, frutado, amadeirado, oriental, cítrico ou gourmand.</li>
+                            <li>Opções com propriedades adicionais, como hidratante, iluminador (com mica), calmante, premium e vegano.</li>
+                            <li>Cada perfume corporal Ultracaps entrega uma experiência sensorial de luxo acessível, com fragrâncias marcantes e longa duração.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 8: Body Splash --><section id="categoria-8" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            8. Body Splash (5% a 20%)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Body Splash Ultracaps –</strong> Linha de perfumação corporal leve e sofisticada, desenvolvida com as mesmas essências de perfumes importados utilizadas nas grandes marcas internacionais.</li>
+                            <li>Disponível com ou sem mica (efeito iluminador), nas versões entre 5% e 20% de concentração.</li>
+                            <li>Ideal para quem busca perfumações intensas e duradouras, com sensorial suave e toque refrescante.</li>
+                            <li>Podem ser personalizados conforme a fragrância desejada (floral, amadeirado, oriental, frutado, gourmand ou cítrico).</li>
+                            <li>Desenvolvidos com bases hipoalergênicas e álcool neutro, proporcionando fixação de qualidade, acabamento premium e perfume elegante para uso diário.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 9: Creme Corporal --><section id="categoria-9" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            9. Creme Corporal (11 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Creme Hidratante (Diário) –</strong> Absorção rápida; mantém a barreira hídrica da pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Nutritivo (Pele Seca) –</strong> Com Manteiga de Karité ou Ureia; hidratação profunda.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Firmador (Antiflacidez) –</strong> Com DMAE ou Colágeno; melhora a elasticidade da pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Antiestrias –</strong> Com Óleo de Rosa Mosqueta; previne e trata estrias recentes.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Clareador (Uniformizador) –</strong> Com Niacinamida; uniformiza o tom de áreas escurecidas.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Calmante (Pós-Sol) –</b> Com Aloe Vera e Camomila; alivia a vermelhidão e ardor.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Antioxidante (Anti-idade) –</strong> Com Vitamina C ou E; previne o envelhecimento precoce.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Iluminador (com Mica) –</strong> Efeito glow imediato; hidrata e ilumina.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Detox –</b> Ação purificante; estimula a renovação celular.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Anticelulite –</strong> Com Cafeína e Centella Asiática; ativa a microcirculação.</li>
+                            <li><strong class="font-semibold text-gray-900">Creme Noturno (Regenerador) –</b> Tratamento intensivo; age durante o sono.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 10: Perfume em Creme --><section id="categoria-10" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            10. Perfume em Creme (5 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Perfume em Creme Hidratante –</strong> Textura rica; perfuma e hidrata profundamente.</li>
+                            <li><strong class="font-semibold text-gray-900">Perfume em Creme Toque Seco –</strong> Absorção rápida; fragrância duradoura sem ser pegajoso.</li>
+                            <li><strong class="font-semibold text-gray-900">Perfume em Creme Iluminador –</strong> Com micropartículas de brilho; perfuma e realça a pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Perfume em Creme Premium –</b> Alta concentração de essência; fixação de longa duração.</li>
+                            <li><strong class="font-semibold text-gray-900">Perfume em Creme Calmante –</b> Fragrância relaxante; ideal para mãos e áreas de pulso.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 11: Esfoliante Corporal --><section id="categoria-11" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            11. Esfoliante Corporal (10 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Esfoliante (Açúcar) –</strong> Esfoliação média e nutritiva; derrete em contato com a pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante (Sal Marinho) –</strong> Esfoliação intensa (detox); remove células mortas profundamente.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante (Sementes Naturais) –</b> Esfoliação vegana (Damasco/Maracujá); 100% biodegradável.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Hidratante –</strong> Base em creme ou óleo; esfolia e hidrata ao mesmo tempo.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Detox –</b> Com Carvão Ativado ou Argila; purifica e renova a pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Iluminador (Mica) –</strong> Deixa um véu de brilho acetinado na pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Anticelulite –</strong> Com Cafeína; ativa a microcirculação durante a massagem.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Calmante –</b> Com Camomila; esfoliação suave para peles sensíveis.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Clareador –</strong> Auxilia na renovação de áreas escurecidas (axilas/virilha).</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Premium (Spa) –</b> Textura rica e fragrância sofisticada; sensorial de luxo.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 12: Esfoliante Facial --><section id="categoria-12" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            12. Esfoliante Facial (10 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Físico Suave –</strong> Microesferas (de arroz/jojoba); ideal para peles sensíveis.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Físico Intenso –</strong> Para peles oleosas; desobstrui poros profundamente.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Químico (AHA/BHA) –</b> Com Ácido Glicólico ou Salicílico; renovação celular sem atrito.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Enzimático –</strong> Com enzimas de frutas (Papaína); renovação biológica suave.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Antiacne –</b> Com Ácido Salicílico; combate cravos e controla a oleosidade.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Detox (Carvão) –</b> Remove poluição e toxinas; efeito purificante.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Clareador –</strong> Uniformiza o tom e devolve a luminosidade.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Anti-idade (Renovador) –</strong> Estimula o colágeno e suaviza linhas finas.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Calmante –</b> Com Aloe Vera; esfolia e acalma a pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Esfoliante Hidratante –</strong> Com Ácido Hialurônico; renova sem ressecar.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 13: Sérum Facial --><section id="categoria-13" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            13. Sérum Facial (11 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Hyalocollagreen –</strong> Preenchedor de rugas com colágeno vegano e ácido hialurônico; ação anti-idade e firmeza facial.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB DMAE –</strong> Efeito lifting imediato; estimula acetilcolina e melhora a firmeza cutânea.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Age Freeze –</b> Antiaging com efeito de relaxamento muscular e redução de linhas de expressão.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Cysteamine –</strong> Clareador e uniformizador de tom; tratamento de melasma e manchas.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Niacinamide –</strong> Controle da oleosidade, ação clareadora e proteção contra luz azul.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Salicylic + BB Skin Healthier –</strong> Antiacne; reduz poros dilatados, inflamações e vermelhidões.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Green Tea + Symbiocaps LA –</b> Equilíbrio do microbioma cutâneo, redução de oleosidade e acne.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum NV Redensifier –</strong> Redensificador facial e capilar; aumenta densidade e volume da pele e fios.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum NV VitC MAP + NV Hyaluronic Acid –</strong> Antioxidante e hidratante; estimula colágeno e devolve luminosidade.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum BB Niacinamide + BB Vitamin B12 –</b> Calmante e regenerador; reduz vermelhidão e fortalece a barreira cutânea.</li>
+                            <li><strong class="font-semibold text-gray-900">Sérum Hidratante com Vitaminas –</strong> Hidratação profunda com complexo multivitamínico (B3, B5, B12, C e E); promove viço, nutrição e maciez à pele.</li>
+                        </ul>
+                    </section>
+
+                    <!-- Categoria 14: Água Micelar --><section id="categoria-14" class="mb-12">
+                        <h3 class="text-2xl md:text-3xl font-bold text-amber-600 mb-5 pb-3 border-b border-amber-600/30">
+                            14. Água Micelar (15 tipos)
+                        </h3>
+                        <ul class="list-none space-y-4 text-gray-700">
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Tradicional (Solução) –</strong> Limpa, demaquila e tonifica em um só passo.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Pele Oleosa –</strong> Com Zinco; controla o brilho e reduz a oleosidade.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Pele Seca –</strong> Com Glicerina; limpa sem ressecar, mantendo a hidratação.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Pele Sensível –</b> Com Aloe Vera; acalma e limpa suavemente, sem ardor.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Antiacne –</b> Com Ácido Salicílico; limpa e previne a formação de cravos.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Anti-idade –</strong> Com Ácido Hialurônico; limpa e auxilia na hidratação e firmeza.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Iluminadora (Vitamina C) –</strong> Devolve a luminosidade e uniformiza o tom.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Detox –</b> Com Carvão Ativado; remove poluição e impurezas profundas.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Demaquilante (Bifásica) –</strong> Remove maquiagem à prova d’água sem esforço.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Tônica –</strong> Reequilibra o pH da pele após a limpeza.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Hidratante –</strong> Fórmula enriquecida para hidratação imediata.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Calmante –</b> Com Camomila; ideal para peles reativas ou pós-sol.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Multifuncional (7 em 1) –</strong> Limpa, demaquila, hidrata, purifica, tonifica, acalma e reequilibra.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar Prebiótica –</strong> Fortalece a barreira de defesa natural da pele.</li>
+                            <li><strong class="font-semibold text-gray-900">Água Micelar (Em Gel) –</b> Textura diferenciada; limpeza eficaz com maior controle na aplicação.</li>
+                        </ul>
+                    </section>
                 </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
+            </main>
+        </div>
+
+
+        <!-- SECÇÃO 2: CATÁLOGO DE FITOTERÁPICOS (MANTIDO) --><div id="fitoterapicos-section" class="content-hidden pt-8">
+            <div class="max-w-7xl mx-auto p-6 sm:p-8 md:p-12">
+                <header class="text-center mb-12">
+                    <!-- Títulos atualizados dinamicamente pelo JS --><h1 id="fito-title" class="text-4xl md:text-5xl font-black uppercase tracking-tight text-gray-900">Linha Fitoterápica Natural</h1>
+                    <p id="fito-subtitle" class="mt-3 text-lg text-gray-600">Extratos Vegetais e Fórmulas Puras para Saúde e Bem-Estar</p>
+                </header>
+
+                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados - Única opção) --><div id="fito-format-selection">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-8 uppercase text-center">Selecione o formato de produto</h2>
+                    <div class="flex justify-center max-w-md mx-auto">
+                        
+                        <!-- Botão 1: Encapsulados (Fito) --><div class="product-format-card w-full sm:w-56 p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform hover:scale-[1.02] duration-200 flex flex-col items-center text-center" 
+                            onclick="selectFitoFormat('Encapsulados')">
+                            <i data-lucide="pill" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Encapsulados</h3>
+                            <p class="text-sm text-gray-600 mt-1">Único formato disponível para Fitoterápicos.</p>
+                        </div>
+
                     </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 17,61"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 32,69"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 55,59"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
+                </div>
+
+                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS (10, 30, 60 CÁPSULAS - PREÇOS REVERTIDOS E ORDEM CORRIGIDA) --><div id="fito-products-grid" class="content-hidden pt-8">
+                    <button onclick="showFitoSelection()" class="mb-6 text-amber-700 hover:text-amber-900 flex items-center font-semibold transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                        Voltar à seleção de formatos
+                    </button>
+                    <!-- TÍTULOS SÃO ATUALIZADOS NA FUNÇÃO selectFitoFormat() --><div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        
+                        <!-- 1. Emagrecedor --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">EMAGRECEDOR</h2>
+                                    <i data-lucide="leaf" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Ação Termogênica e Diurética Natural</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="18.15"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="36.31"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="59.03"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 h-10 price-display-container">
+                                    <span class="price-text">Selecione</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 2. Libido (INVERTENDO ORDEM DO PREÇO COM NOTA) --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">LIBIDO</h2>
+                                    <i data-lucide="heart" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Vitalidade e Estímulo com Extratos</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="18.44"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="33.12"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="57.06"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                    
+                                    <!-- 1. Colocado o preço/Selecione em primeiro -->
+                                    <div class="mt-4 h-10 price-display-container">
+                                        <span class="price-text">Selecione</span>
+                                    </div>
+
+                                    <!-- 2. Colocado a nota de observação por último -->
+                                    <p class="text-sm price-note mt-4">
+                                        Versão Masculina: <strong>Acréscimo de R$ 2,00 por pote.</strong>
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+
+                        <!-- 3. DOR (Posição alterada) --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">DOR</h2>
+                                    <i data-lucide="shield-plus" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                 <p class="text-sm text-gray-500 mt-1">Anti-inflamatório e Analgésico Herbal</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="17.01"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="30.38"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="54.97"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 h-10 price-display-container">
+                                    <span class="price-text">Selecione</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 4. Nootrópico Memória e Foco (Posição alterada) --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">NOOTRÓPICO MEMÓRIA E FOCO</h2>
+                                    <i data-lucide="brain-circuit" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Cognição e Concentração com Fitocompostos</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="22.68"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="38.03"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="62.96"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 h-10 price-display-container">
+                                    <span class="price-text">Selecione</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 5. Menopausa e Tensão Pré-Menstrual --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">MENOPAUSA E TPM</h2>
+                                    <i data-lucide="flower-2" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Equilíbrio Hormonal Feminino (Fitoestrogênios)</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="17.55"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="32.41"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="54.59"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 h-10 price-display-container">
+                                    <span class="price-text">Selecione</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 6. Energia e Vitalidade (Nome corrigido) --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                            <div class="p-6 card-header-bg">
+                                <div class="flex items-center justify-between">
+                                    <h2 class="text-2xl font-bold text-gold-gradient">ENERGIA E VITALIDADE</h2>
+                                    <i data-lucide="activity" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+                                </div>
+                                <p class="text-sm text-gray-500 mt-1">Aumento de Disposição (Guaraná/Chá Verde).</p>
+                            </div>
+                            <div class="p-6">
+                                <div>
+                                    <div class="space-y-3">
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="21.50"><span class="text-xl font-bold text-gray-700">10 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="37.50"><span class="text-xl font-bold text-gray-700">30 cápsulas</span></button>
+                                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="61.50"><span class="text-xl font-bold text-gray-700">60 cápsulas</span></button>
+                                    </div>
+                                </div>
+                                <div class="mt-4 h-10 price-display-container">
+                                    <span class="price-text">Selecione</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
-                    </div>
+                </div>
+
+                <!-- Observações Importantes (fora da navegação interna) --><div class="mt-16 bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Observações Importantes</h3>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Produtos desenvolvidos com <strong>os melhores insumos do mercado</strong>, garantindo eficácia e alta qualidade.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Os valores incluem pote, tampa e rótulo já aplicados.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>O rótulo é produzido com tecnologia de ponta, <strong>acabamento premium com alto-relevo</strong>, oferecendo um visual sofisticado e exclusivo, sendo o melhor do mercado.</span>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         
-        <!-- Card Sono Centralizado -->
-        <div class="flex justify-center mt-8">
-            <div class="bg-white rounded-2xl overflow-hidden card-tilt scroll-animate w-full sm:max-w-sm lg:max-w-none lg:w-[31.5%]">
-                <div class="p-6 card-header-bg flex items-center justify-between">
-                    <h2 class="text-2xl font-bold text-gold-gradient">Sono</h2>
-                    <i data-lucide="moon" class="w-10 h-10 text-gold-gradient opacity-80"></i>
+        <!-- SECÇÃO 3: CATÁLOGO DE NUTRACÊUTICOS (ATUALIZADO) --><div id="nutraceuticos-section" class="content-hidden pt-8">
+            <div class="max-w-7xl mx-auto p-6 sm:p-8 md:p-12">
+                <header class="text-center mb-12">
+                    <h1 id="nutra-title" class="text-4xl md:text-5xl font-black uppercase tracking-tight text-gray-900">Linha Nutracêutica Premium</h1>
+                    <p id="nutra-subtitle" class="mt-3 text-lg text-gray-600">Selecione o formato de produto desejado para ver as opções disponíveis.</p>
+                </header>
+
+                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados, Pó, Gotas, Gummy) --><div id="nutra-format-selection">
+                    <h2 class="text-xl md:text-2xl font-bold text-gray-900 mb-8 uppercase text-center">Selecione o formato de produto</h2>
+                    <div class="grid grid-cols-2 gap-8 md:grid-cols-5 max-w-6xl mx-auto">
+                        
+                        <!-- Botão 1: Encapsulados --><div class="product-format-card p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform flex flex-col items-center text-center" 
+                            onclick="selectNutraFormat('Encapsulados')">
+                            <i data-lucide="pill" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Encapsulados</h3>
+                            <p class="text-sm text-gray-600 mt-1">Cápsulas duras e Softgels.</p>
+                        </div>
+
+                        <!-- Botão 2: Pó --><div class="product-format-card p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform flex flex-col items-center text-center" 
+                            onclick="selectNutraFormat('Pó / Blends')">
+                            <i data-lucide="package" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Pó / Blends</h3>
+                            <p class="text-sm text-gray-600 mt-1">Potes e sachês solúveis.</p>
+                        </div>
+
+                        <!-- Botão 3: Gotas / Líquido --><div class="product-format-card p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform flex flex-col items-center text-center" 
+                            onclick="selectNutraFormat('Líquidos / Gotas')">
+                            <i data-lucide="droplet" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Líquidos / Gotas</h3>
+                            <p class="text-sm text-gray-600 mt-1">Líquidos e sprays sublinguais.</p>
+                        </div>
+
+                        <!-- Botão 4: Pastilha de Goma (Sem Açúcar/Stevia) --><div class="product-format-card p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform flex flex-col items-center text-center" 
+                            onclick="selectNutraFormat('Pastilha de Goma (Sem Açúcar)')">
+                            <i data-lucide="candy" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Goma (Sem Açúcar)</h3>
+                            <p class="text-sm text-gray-600 mt-1">Gomas mastigáveis (Stevia).</p>
+                        </div>
+
+                        <!-- Botão 5: Pastilha de Goma (Com Açúcar) --><div class="product-format-card p-6 rounded-xl border border-amber-600/50 shadow-xl cursor-pointer transition transform flex flex-col items-center text-center" 
+                            onclick="selectNutraFormat('Pastilha de Goma (Com Açúcar)')">
+                            <i data-lucide="cookie" class="w-12 h-12 text-amber-700 mb-3"></i>
+                            <h3 class="text-xl font-bold text-amber-900">Goma (Com Açúcar)</h3>
+                            <p class="text-sm text-gray-600 mt-1">Gomas mastigáveis (Padrão).</p>
+                        </div>
+                    </div>
                 </div>
-                <div class="p-6">
-                    <div class="text-center mb-4">
-                        <p class="text-sm text-gray-500 flex items-center justify-center gap-2">Selecione a quantidade <i data-lucide="mouse-pointer-click" class="w-4 h-4"></i></p>
-                    </div>
-                    <div class="space-y-3">
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 18,10"><span class="text-xl font-bold text-gold-gradient">10 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 34,00"><span class="text-xl font-bold text-gold-gradient">30 cápsulas</span></button>
-                        <button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="R$ 58,13"><span class="text-xl font-bold text-gold-gradient">60 cápsulas</span></button>
-                    </div>
-                    <div class="mt-4 text-center h-10 flex items-center justify-center">
-                        <span class="price-display text-3xl font-extrabold text-metallic-realistic transition-all duration-500 ease-out opacity-0 transform translate-y-3"></span>
-                    </div>
+
+                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS NUTRACÊUTICOS (GERADO DINAMICAMENTE) --><div id="nutra-products-grid" class="content-hidden pt-8">
+                    <button onclick="showNutraSelection()" class="mb-6 text-amber-700 hover:text-amber-900 flex items-center font-semibold transition-colors">
+                        <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
+                        Voltar à seleção de formatos
+                    </button>
+                    <!-- Nota importante sobre os preços: Agora reais (com margem) --><p class="price-note mb-8 text-center bg-green-50 border-green-500 text-green-800">
+                        ✅ **PREÇOS ATUALIZADOS:** Os valores exibidos são os custos por unidade de pote com sua marca, conforme o Catálogo.
+                    </p>
+                    
+                    <!-- CONTAINER ONDE OS CARDS SERÃO INJETADOS PELO JS --><div id="nutra-cards-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                        <!-- Cards injetados aqui --></div>
                 </div>
+
+                <!-- Observações Importantes (fora da navegação interna) --><div class="mt-16 bg-white p-8 rounded-2xl shadow-lg border border-gray-200">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Observações Importantes (Nutracêuticos)</h3>
+                    <ul class="space-y-4 text-gray-600">
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Tecnologia de microencapsulamento disponível para estabilidade e absorção superior em todos os formatos.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Desenvolvemos rótulos, sabores e blends exclusivos para todas as linhas.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
+                            <span>Os preços exibidos já incluem os custos de produção, pote, tampa e rótulo premium.</span>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
         </div>
 
-        <!-- Observações Importantes -->
-        <div class="mt-16 bg-white p-8 rounded-2xl shadow-lg border border-gray-200 scroll-animate">
-            <h3 class="text-2xl font-bold text-gray-900 mb-4">Observações Importantes</h3>
-            <ul class="space-y-4 text-gray-600">
-                <li class="flex items-start">
-                    <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
-                    <span>Produtos desenvolvidos com <strong>os melhores insumos do mercado</strong>, garantindo eficácia e alta qualidade.</span>
-                </li>
-                <li class="flex items-start">
-                    <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
-                    <span>Preços incluem <strong>pote, tampa e rótulo</strong> já aplicados.</span>
-                </li>
-                <li class="flex items-start">
-                    <i data-lucide="check-circle-2" class="w-6 h-6 text-green-500 mr-3 mt-1 flex-shrink-0"></i>
-                    <span>O rótulo é produzido com tecnologia de ponta, <strong>acabamento premium com alto-relevo</strong>, oferecendo um visual sofisticado e exclusivo, sendo o melhor do mercado.</span>
-                </li>
-            </ul>
-        </div>
+
+        <!-- FOOTER (Compartilhado pelas três secções) --><footer class="bg-gray-100 text-gray-700 py-10 mt-16 border-t border-gray-200">
+            <!-- Tagline Section --><div class="text-center px-6 mb-8">
+                <p class="text-2xl font-semibold italic text-amber-700">
+                    “Excelência e inovação em cada fórmula — Ultracaps Brasil.”
+                </p>
+            </div>
+            <!-- Contact Info Section --><div class="container mx-auto max-w-6xl px-6 text-center text-sm">
+                <p class="font-bold text-gray-900 mb-2">Ultracaps Brasil LTDA</p>
+                <p>Av. Carneiro Leão, 563 – Zona 01, Maringá – PR — CEP 87014-010</p>
+                <div class="my-2 space-x-4">
+                    <a href="tel:+5544988035261" class="hover:text-amber-700 transition-colors">(44) 98803-5261</a>
+                    <span>|</span>
+                    <a href="mailto:contato@ultracapsbrasil.com.br" class="hover:text-amber-700 transition-colors">contato@ultracapsbrasil.com.br</a>
+                </div>
+                <a href="https://www.ultracapsbrasil.com.br" target="_blank" rel="noopener noreferrer" class="font-semibold text-gray-900 hover:text-amber-700 transition-colors">
+                    www.ultracapsbrasil.com.br
+                </a>
+            </div>
+        </footer>
     </div>
 
+
     <script>
+        // --- DADOS DOS PRODUTOS NUTRACÊUTICOS (Extraídos do PDF e adaptados) ---
+        const nutraProductsData = [
+            // ========================= 1. ENCAPSULADOS (Cápsulas/Softgels) =========================
+            // PRODUTO 01 (Pág 3)
+            {
+                format: 'Encapsulados',
+                name: "Cabelo, Pele e Unhas",
+                subtitle: "Antiaging e antioxidante. Auxilia no sistema imune.",
+                ingredients: "Biotina (dose máxima), Vitaminas A, E, C, Complexo B, Cálcio, Cromo, Selênio, Zinco.",
+                icon: "sparkle",
+                prices: { '100 unidades': 18.00, '300 unidades': 14.50, '500 unidades': 11.50, '1000 unidades': 9.50 }
+            },
+            // PRODUTO 02 (Pág 4)
+            {
+                format: 'Encapsulados',
+                name: "Laranja Moro, Cafeína e Cromo",
+                subtitle: "Auxilia o metabolismo de gorduras e no controle de peso.",
+                ingredients: "Extrato de Laranja Moro, Cafeína, Guaraná, Vitaminas A, E, C, Cromo.",
+                icon: "zap",
+                prices: { '100 unidades': 18.00, '300 unidades': 15.95, '500 unidades': 13.90, '1000 unidades': 12.50 }
+            },
+            // PRODUTO 03 (Pág 5)
+            {
+                format: 'Encapsulados',
+                name: "Taurina",
+                subtitle: "Antioxidante, regeneração estrutural e melhora a resistência física.",
+                ingredients: "Taurina (1000mg).",
+                icon: "activity",
+                prices: { '500 unidades': 15.50, '1000 unidades': 11.95, '3000 unidades': 9.50 }
+            },
+            // PRODUTO 04 (Pág 6)
+            {
+                format: 'Encapsulados',
+                name: "Magnésio e L-Treonina",
+                subtitle: "Apoio à formação óssea, síntese de proteínas e regeneração de tecidos.",
+                ingredients: "L-Treonina, Magnésio.",
+                icon: "bone",
+                prices: { '500 unidades': 13.90, '1000 unidades': 10.00, '3000 unidades': 7.95 }
+            },
+            // PRODUTO 05 (Pág 7)
+            {
+                format: 'Encapsulados',
+                name: "Magnésio Quelato",
+                subtitle: "Apoio às células, produção de energia e auxílio à formação dental e óssea.",
+                ingredients: "Magnésio Quelato.",
+                icon: "heart",
+                prices: { '500 unidades': 14.70, '100 unidades': 10.50, '3000 unidades': 7.95 }
+            },
+            // PRODUTO 06 (Pág 8)
+            {
+                format: 'Encapsulados',
+                name: "Magnésio Dimalato",
+                subtitle: "Equilíbrio mineral, apoio à função muscular e metabolismo energético.",
+                ingredients: "Dimagnésio Malato.",
+                icon: "hand-metal",
+                prices: { '500 unidades': 16.25, '1000 unidades': 12.50, '3000 unidades': 9.95 }
+            },
+            // PRODUTO 07 (Pág 9)
+            {
+                format: 'Encapsulados',
+                name: "Complexo 3 Magnésios",
+                subtitle: "Auxilia no funcionamento muscular, saúde óssea e neuromuscular.",
+                ingredients: "Magnésio Bisglicinato, Magnésio Dimalato, Óxido de Magnésio.",
+                icon: "layers",
+                prices: { '100 unidades': 18.00, '300 unidades': 14.50, '500 unidades': 11.55, '1000 unidades': 9.50 }
+            },
+            // PRODUTO 08 (Pág 10)
+            {
+                format: 'Encapsulados',
+                name: "Zinco Bisglicinato",
+                subtitle: "Atua como antioxidante, auxilia no metabolismo e apoio ao sistema imune.",
+                ingredients: "Zinco Bisglicinato.",
+                icon: "shield-check",
+                prices: { '500 unidades': 13.95, '1000 unidades': 9.90, '3000 unidades': 7.50 }
+            },
+            // PRODUTO 09 (Pág 11)
+            {
+                format: 'Encapsulados',
+                name: "Vitamina D3 e K2",
+                subtitle: "Melhora na absorção do cálcio e fósforo. Ajuda no sistema imunológico.",
+                ingredients: "Vitamina D3, Vitamina K2.",
+                icon: "sun",
+                prices: { '500 unidades': 15.50, '1000 unidades': 11.50, '3000 unidades': 9.30 }
+            },
+            // PRODUTO 10 (Pág 12)
+            {
+                format: 'Encapsulados',
+                name: "Coenzima Q10 e L-Triptofano",
+                subtitle: "Proteção antioxidante, melhora o descanso e potencializa a concentração.",
+                ingredients: "Coenzima Q10, L-Triptofano.",
+                icon: "cloud-moon",
+                prices: { '500 unidades': 16.00, '1000 unidades': 12.90, '3000 unidades': 9.80 }
+            },
+            // PRODUTO 11 (Pág 13)
+            {
+                format: 'Encapsulados',
+                name: "Coenzima Q10 + Vitamina E",
+                subtitle: "Ação antioxidante potente, suporte celular e mais energia para o dia a dia.",
+                ingredients: "Coenzima Q10, Vitamina E.",
+                icon: "plus-circle",
+                prices: { '500 unidades': 19.35, '1000 unidades': 15.75, '3000 unidades': 13.50 }
+            },
+            // PRODUTO 12 (Pág 14)
+            {
+                format: 'Encapsulados',
+                name: "Cúrcuma e Colágeno Tipo II",
+                subtitle: "Saúde dos ossos e articulações, redução de inflamação e melhora imune.",
+                ingredients: "Extrato de Cúrcuma Longa, Colágeno Tipo II, MSM, Zinco, Vitaminas D3 e K2.",
+                icon: "leaf",
+                prices: { '100 unidades': 18.00, '300 unidades': 16.50, '500 unidades': 14.90, '1000 unidades': 13.50 }
+            },
+            // PRODUTO 13 (Pág 15)
+            {
+                format: 'Encapsulados',
+                name: "Colágeno Tipo 2",
+                subtitle: "Suporte às articulações, elasticidade e manutenção de cartilagem.",
+                ingredients: "Colágeno de frango com Colágeno Tipo II não desnaturado.",
+                icon: "armchair",
+                prices: { '500 unidades': 14.95, '1000 unidades': 11.25, '3000 unidades': 8.80 }
+            },
+            // PRODUTO 14 (Pág 16)
+            {
+                format: 'Encapsulados',
+                name: "Nootrópico (Foco e Alerta)",
+                subtitle: "Promove neurotransmissores, auxilia na concentração e reduz a fadiga.",
+                ingredients: "L-tirosina, L-Carnitina, Taurina, Cafeína.",
+                icon: "brain-circuit",
+                prices: { '500 unidades': 16.50, '1000 unidades': 12.50, '3000 unidades': 9.25 }
+            },
+            // PRODUTO 15 (Pág 17)
+            {
+                format: 'Encapsulados',
+                name: "Fórmula Anti-Ansiedade",
+                subtitle: "Controla o estresse, reduz a ansiedade, melhora o sono e regula o ciclo circadiano.",
+                ingredients: "Triptofano, Melatonina, CoQ10, Fosfatidilserina, Vit. D3, C, Mg, Fe, Zn.",
+                icon: "wind",
+                prices: { '500 unidades': 18.00, '1000 unidades': 13.90, '3000 unidades': 10.50 }
+            },
+            // PRODUTO 16 (Pág 18)
+            {
+                format: 'Encapsulados',
+                name: "N-Acetil Cisteína (NAC)",
+                subtitle: "Antioxidante, precursor da Glutationa, protege e potencializa o sistema imune.",
+                ingredients: "N-Acetil Cisteína (L-cisteína).",
+                icon: "syringe",
+                prices: { '500 unidades': 16.20, '1000 unidades': 12.45, '3000 unidades': 9.95 }
+            },
+            // PRODUTO 17 (Pág 19)
+            {
+                format: 'Encapsulados',
+                name: "L-Tirosina",
+                subtitle: "Reduz a fadiga, maximiza a concentração e potencializa a memória.",
+                ingredients: "L-tirosina.",
+                icon: "cpu",
+                prices: { '500 unidades': 15.90, '1000 unidades': 11.50, '3000 unidades': 9.80 }
+            },
+
+            // ========================= 2. PÓ / BLENDS (Pó Solúvel) =========================
+            // PRODUTO 31 (Pág 33)
+            {
+                format: 'Pó / Blends',
+                name: "Creatina Solúvel (Pó)",
+                subtitle: "Potencializa o desempenho, estimula a força e auxilia na recuperação muscular.",
+                ingredients: "Creatina Monohidratada Pura.",
+                icon: "dumbbell",
+                prices: { '100 unidades': 46.90, '300 unidades': 44.90, '500 unidades': 42.50, '1000 unidades': 40.90 }
+            },
+            // PRODUTO 30 (Pág 32)
+            {
+                format: 'Pó / Blends',
+                name: "Chá 21 Ervas",
+                subtitle: "Ação diurética, desintoxicante e desinflamatória. Auxilia na redução de peso.",
+                ingredients: "Mistura de chás e ervas (Boldo, Camomila, Amora, Carqueja, Chá Verde, Estévia, etc.).",
+                icon: "cup-soda",
+                prices: { '100 unidades': 12.90, '300 unidades': 10.90, '500 unidades': 9.50, '1000 unidades': 7.00 }
+            },
+
+            // ========================= 3. LÍQUIDOS / GOTAS (Gotas) =========================
+            // PRODUTO 18 (Pág 20)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Melatonina Líquida (Gotas)",
+                subtitle: "Auxilia na melhora do sono, regula o ciclo circadiano e combate o Jet-Lag. Sabor Maracujá.",
+                ingredients: "Melatonina (0,2mg por gota).",
+                icon: "moon",
+                prices: { '100 unidades': 10.00, '300 unidades': 9.50, '500 unidades': 8.50, '1000 unidades': 7.00 }
+            },
+            // PRODUTO 19 (Pág 21)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Óleo de Semente de Abóbora + Vitamina E",
+                subtitle: "Alívio dos sintomas da próstata, alto teor de Vitamina E e ajuda a manter o colesterol normalizado. Sem Sabor.",
+                ingredients: "Óleo de Semente de Abóbora, Vitamina E.",
+                icon: "tincture",
+                prices: { '300 unidades': 12.90, '500 unidades': 11.25, '1000 unidades': 8.95, '3000 unidades': 7.20 }
+            },
+            // PRODUTO 20 (Pág 22)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Estimulante (Líquido)",
+                subtitle: "Energia, disposição e auxilia no aumento natural da produção de testosterona. Sabor Laranja.",
+                ingredients: "Arginina, Taurina, Vitamina B6, Magnésio, Zinco.",
+                icon: "trending-up",
+                prices: { '100 unidades': 10.00, '300 unidades': 9.50, '500 unidades': 8.50, '1000 unidades': 7.00 }
+            },
+            // PRODUTO 21 (Pág 23)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Vitamina B12 Metilcobalamina (Líquida)",
+                subtitle: "Apoio à formação celular sanguínea, síntese de neurotransmissores e rápida absorção. Sabor Frutas Vermelhas.",
+                ingredients: "Vitamina B12 Metilcobalamina.",
+                icon: "droplet",
+                prices: { '300 unidades': 11.50, '500 unidades': 9.50, '1000 unidades': 7.50, '3000 unidades': 6.25 }
+            },
+            // PRODUTO 22 (Pág 24)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Vitamina D3 e K2 (Líquida)",
+                subtitle: "Auxilia na manutenção dos ossos, sistema imune e absorção de cálcio. Sabor Morango.",
+                ingredients: "Vitamina D3, Vitamina K.",
+                icon: "sun",
+                prices: { '300 unidades': 15.90, '500 unidades': 13.90, '1000 unidades': 10.80, '3000 unidades': 9.50 }
+            },
+            // PRODUTO 23 (Pág 25)
+            {
+                format: 'Líquidos / Gotas',
+                name: "Vitamina D3 (Líquida)",
+                subtitle: "Auxilia na manutenção dos ossos, funcionamento do sistema imune e absorção do cálcio. Sabor Morango.",
+                ingredients: "Vitamina D3.",
+                icon: "syringe",
+                prices: { '300 unidades': 11.50, '500 unidades': 9.50, '1000 unidades': 7.50, '3000 unidades': 6.25 }
+            },
+
+            // ========================= 4. PASTILHA DE GOMA (COM AÇÚCAR) =========================
+            // PRODUTO 25 (Pág 27)
+            {
+                format: 'Pastilha de Goma (Com Açúcar)',
+                name: "Melatonina em Goma (Vegana/Com Açúcar)",
+                subtitle: "Auxilia na melhora do sono, regula o ciclo circadiano e Jet-Lag. Sabor Maracujá.",
+                ingredients: "Melatonina (Contém Açúcar).",
+                icon: "gummy-bear",
+                isGummy: true,
+                prices: { '100 unidades': 18.00, '300 unidades': 17.00, '500 unidades': 16.00, '1000 unidades': 15.50 }
+            },
+
+            // ========================= 5. PASTILHA DE GOMA (SEM AÇÚCAR/STEVIA) =========================
+            // PRODUTO 24 (Pág 26 - Creatina Pastilha)
+            {
+                format: 'Pastilha de Goma (Sem Açúcar)',
+                name: "Creatina em Pastilha",
+                subtitle: "Melhora o desempenho físico, reduz a recuperação e aumenta a resistência. Adoçado com Stevia.",
+                ingredients: "Creatina (3g por porção). Formato: Coração.",
+                icon: "heart-handshake",
+                isGummy: true,
+                prices: { '100 unidades': 45.90, '300 unidades': 42.50, '500 unidades': 40.90, '1000 unidades': 38.25 }
+            },
+            // PRODUTO 26 (Pág 28 - Hair & Skin Gummy)
+            {
+                format: 'Pastilha de Goma (Sem Açúcar)',
+                name: "Hair & Skin em Goma (Sem Açúcar)",
+                subtitle: "Cabelo e pele, antiaging e antioxidante. Auxilia no sistema imune. Adoçado com Stevia.",
+                ingredients: "Colágeno, Vitaminas (A, D, E, C, B5, B6, B7, B12). Formato: Urso.",
+                icon: "palette",
+                isGummy: true,
+                prices: { '100 unidades': 26.90, '300 unidades': 23.90, '500 unidades': 22.90, '1000 unidades': 21.50 }
+            },
+            // PRODUTO 27 (Pág 29 - Hair & Skin Vegan Gummy)
+            {
+                format: 'Pastilha de Goma (Sem Açúcar)',
+                name: "Hair & Skin Vegana (Sem Açúcar)",
+                subtitle: "Fórmula Vegana, Cabelo e Pele, Antiaging e antioxidante. Base de Tapioca e Pectina.",
+                ingredients: "Biotina, Vitaminas (A, C, Niacina, B6, Ác. Fólico, B12). Formato: Colina.",
+                icon: "plant",
+                isGummy: true,
+                prices: { '100 unidades': 22.00, '300 unidades': 21.00, '500 unidades': 20.50, '1000 unidades': 18.50 }
+            },
+             // PRODUTO 28 (Pág 30 - Chiclete Multivitamínico)
+            {
+                format: 'Pastilha de Goma (Sem Açúcar)',
+                name: "Goma de Mascar Multivitamínica",
+                subtitle: "Cabelo, pele e unhas. Antiaging e multivitamínico para todas as idades.",
+                ingredients: "Vitaminas (A, E, B3, B5, B6, B7), Iodo, Selênio, Zinco.",
+                icon: "message-circle",
+                isGummy: true,
+                prices: { '100 unidades': 22.00, '300 unidades': 21.00, '500 unidades': 20.50, '1000 unidades': 18.50 }
+            },
+            // PRODUTO 29 (Pág 31 - Polivitamínico Kids Gummy)
+            {
+                format: 'Pastilha de Goma (Sem Açúcar)',
+                name: "Polivitamínico Kids em Goma (Vegano)",
+                subtitle: "Auxilia no desenvolvimento, sistema imune, ossos e dentes. Base de Tapioca e Pectina.",
+                ingredients: "Vitaminas (A, D, E, K, C, Complexo B), Cromo, Ferro, Magnésio, Selênio, Zinco.",
+                icon: "baby",
+                prices: { '100 unidades': 22.00, '300 unidades': 21.00, '500 unidades': 20.50, '1000 unidades': 18.50 }
+            }
+        ];
+
+
+        // Inicialização de ícones Lucide
         document.addEventListener('DOMContentLoaded', () => {
+            // Cria os ícones Lucide
             lucide.createIcons();
-
-            // --- Animação de Scroll Sincronizada ---
-            const scrollObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        scrollObserver.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            document.querySelectorAll('.scroll-animate').forEach(target => {
-                scrollObserver.observe(target);
-            });
-
-            // --- Lógica para Preços Clicáveis ---
-            document.querySelectorAll('.card-tilt').forEach(card => {
-                const quantityButtons = card.querySelectorAll('.quantity-btn');
-                const priceDisplay = card.querySelector('.price-display');
-
-                quantityButtons.forEach(button => {
-                    button.addEventListener('click', () => {
-                        quantityButtons.forEach(btn => btn.classList.remove('active'));
-                        button.classList.add('active');
-
-                        const newPrice = button.dataset.price;
-
-                        priceDisplay.classList.add('opacity-0', 'translate-y-3');
-
-                        setTimeout(() => {
-                            priceDisplay.textContent = newPrice;
-                            priceDisplay.classList.remove('opacity-0', 'translate-y-3');
-                        }, 150);
-                    });
-                });
-            });
-
-            // --- Lógica para Efeito 3D (Giroscópio e Mouse) ---
-            const cards = document.querySelectorAll('.card-tilt');
-            let isGyroActive = false;
-
-            const handleOrientation = (event) => {
-                if (event.beta === null || event.gamma === null) return;
-                const beta = event.beta;
-                const gamma = event.gamma;
-                const maxRotate = 12;
-                const rotateX = Math.max(-maxRotate, Math.min(maxRotate, beta * -0.25));
-                const rotateY = Math.max(-maxRotate, Math.min(maxRotate, gamma * 0.5));
-                
-                requestAnimationFrame(() => {
-                    cards.forEach(card => {
-                        card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-                    });
-                });
-            };
-            
-            const handleMouseMove = (e) => {
-                const card = e.currentTarget;
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                const { width, height } = rect;
-                const rotateX = (y / height - 0.5) * -10;
-                const rotateY = (x / width - 0.5) * 10;
-                requestAnimationFrame(() => {
-                    card.style.transform = `perspective(1500px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
-                });
-            };
-
-            const handleMouseLeave = (e) => {
-                requestAnimationFrame(() => {
-                    e.currentTarget.style.transform = 'perspective(1500px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
-                });
-            };
-
-            const activateGyro = () => {
-                if (isGyroActive) return;
-                isGyroActive = true;
-                window.addEventListener('deviceorientation', handleOrientation);
-                cards.forEach(card => {
-                    card.removeEventListener('mousemove', handleMouseMove);
-                    card.removeEventListener('mouseleave', handleMouseLeave);
-                });
-            };
-
-            const initInteractiveEffects = () => {
-                const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-                cards.forEach(card => {
-                    card.addEventListener('mousemove', handleMouseMove);
-                    card.addEventListener('mouseleave', handleMouseLeave);
-                });
-
-                if (isTouchDevice) {
-                    const gyroBanner = document.getElementById('gyro-banner');
-                    const activateGyroBtn = document.getElementById('activate-gyro');
-                    const dismissGyroBtn = document.getElementById('dismiss-gyro');
-                    
-                    if (gyroBanner && activateGyroBtn && dismissGyroBtn) {
-                        const hideBanner = () => {
-                            gyroBanner.style.transform = 'translate(-50%, 150%)';
-                            gyroBanner.style.opacity = '0';
-                            setTimeout(() => { gyroBanner.style.display = 'none'; }, 500);
-                        };
-
-                        dismissGyroBtn.addEventListener('click', hideBanner);
-
-                        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                            gyroBanner.classList.remove('hidden');
-                            setTimeout(() => {
-                                gyroBanner.style.transform = 'translate(-50%, 0)';
-                                gyroBanner.style.opacity = '1';
-                            }, 100);
-
-                            activateGyroBtn.addEventListener('click', () => {
-                                DeviceOrientationEvent.requestPermission()
-                                    .then(permissionState => {
-                                        if (permissionState === 'granted') {
-                                            activateGyro();
-                                        }
-                                    })
-                                    .catch(console.error)
-                                    .finally(hideBanner);
-                            });
-                        } else if ('DeviceOrientationEvent' in window) {
-                            activateGyro();
-                        }
-                    }
-                }
-            };
-
-            initInteractiveEffects();
+            // Inicia a lógica de preço (só funcionará para elementos gerados dinamicamente após a chamada)
+            initPriceLogic(); 
         });
+
+        // --- LÓGICA DE PREÇOS (REUTILIZADA) ---
+        function initPriceLogic() {
+            // Seletor para os botões de preço, abrangendo TANTO FITOTERÁPICOS QUANTO NUTRACÊUTICOS (dinâmicos e estáticos)
+            const allPriceButtons = document.querySelectorAll('#fito-products-grid .quantity-btn, #nutra-cards-container .quantity-btn');
+            
+            // Remove todos os listeners existentes antes de adicionar novos para evitar duplicação.
+            allPriceButtons.forEach(button => {
+                button.removeEventListener('click', handlePriceClick);
+                button.addEventListener('click', handlePriceClick);
+            });
+        }
+        
+        function handlePriceClick(e) {
+            const card = e.currentTarget.closest('.bg-white');
+            // Verifica se o card foi encontrado
+            if (!card) return;
+            
+            const quantityButtons = card.querySelectorAll('.quantity-btn');
+            const priceTextSpan = card.querySelector('.price-text'); // Seleciona diretamente o span com a classe price-text
+            
+            // 1. Remove 'active' de todos e adiciona ao botão clicado
+            quantityButtons.forEach(btn => btn.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            // 2. Pega o valor do preço
+            const priceValue = parseFloat(e.currentTarget.dataset.price);
+            
+            // 3. Formata o preço como moeda brasileira (R$)
+            const formattedPrice = priceValue.toLocaleString('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            });
+
+            // 4. Aplica a transição de opacidade para o "aparecer suavemente"
+            const priceDisplayContainer = card.querySelector('.price-display-container');
+            priceDisplayContainer.style.opacity = '0';
+            
+            setTimeout(() => {
+                // 5. Atualiza o display do preço.
+                priceTextSpan.textContent = formattedPrice;
+
+                // 6. Volta a opacidade para 1
+                priceDisplayContainer.style.opacity = '1';
+            }, 300); // Tempo da transição (0.3s definido no CSS)
+        }
+
+
+        // --- FUNÇÕES DE NAVEGAÇÃO INTERNA FITOTERÁPICA (MANTIDAS) ---
+        
+        function showFitoSelection() {
+            document.getElementById('fito-format-selection').classList.remove('content-hidden');
+            document.getElementById('fito-products-grid').classList.add('content-hidden');
+            
+            document.getElementById('fito-title').textContent = 'Linha Fitoterápica Natural';
+            document.getElementById('fito-subtitle').textContent = 'Extratos Vegetais e Fórmulas Puras para Saúde e Bem-Estar';
+        }
+
+        function selectFitoFormat(format) {
+            if (format === 'Encapsulados') {
+                document.getElementById('fito-format-selection').classList.add('content-hidden');
+                document.getElementById('fito-products-grid').classList.remove('content-hidden');
+                
+                document.getElementById('fito-title').textContent = `Fitoterápicos: ${format} Premium`;
+                document.getElementById('fito-subtitle').textContent = 'Selecione a dose desejada abaixo.';
+
+                // Reinicia a lógica de preço para os cards visíveis
+                initPriceLogic(); 
+            }
+        }
+        
+        // --- FUNÇÕES DE NAVEGAÇÃO INTERNA NUTRACÊUTICA (ATUALIZADAS) ---
+
+        // 1. Geração dinâmica dos cards de produtos Nutra Encapsulados
+        function generateNutraCards(format) {
+            const container = document.getElementById('nutra-cards-container');
+            container.innerHTML = ''; // Limpa o conteúdo anterior
+            
+            const filteredProducts = nutraProductsData.filter(p => p.format === format);
+
+            let html = '';
+
+            filteredProducts.forEach((product, index) => {
+                // Define classes de cor baseadas no formato (Para Goma)
+                const headerClass = product.isGummy ? 'gummy-card-header-bg' : 'card-header-bg';
+                const textClass = product.isGummy ? 'gummy-text-gradient' : 'text-gold-gradient';
+
+                // Cria os botões de quantidade dinamicamente com base nos preços disponíveis
+                const priceButtons = Object.entries(product.prices).map(([label, price]) => {
+                    // price é o valor unitário
+                    return `<button class="quantity-btn w-full p-3 rounded-lg text-left" data-price="${price.toFixed(2)}">
+                                <span class="text-xl font-bold text-gray-700">${label}</span>
+                            </button>`;
+                }).join('');
+
+                // Define o placeholder de preço para TODOS os cards
+                const pricePlaceholder = `Selecione`;
+
+                html += `
+                    <!-- CARD ${index + 1}: ${product.name.toUpperCase()} --><div class="bg-white rounded-2xl overflow-hidden shadow-lg">
+                        <div class="p-6 ${headerClass}">
+                            <div class="flex items-center justify-between">
+                                <h2 class="text-xl font-bold ${textClass}">${product.name.toUpperCase()}</h2>
+                                <i data-lucide="${product.icon}" class="w-10 h-10 ${textClass} opacity-80"></i>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-1">${product.subtitle}</p>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-sm text-gray-600 mb-3 font-medium"><strong>Fórmula:</strong> ${product.ingredients}.</p>
+                            <div>
+                                <div class="space-y-3">
+                                    ${priceButtons}
+                                </div>
+                            </div>
+                            <div class="mt-4 h-10 price-display-container">
+                                <span class="price-text">${pricePlaceholder}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+
+            // Recria os ícones Lucide para os novos cards
+            lucide.createIcons();
+        }
+
+        // 2. Mostra a sub-seção de seleção de formato (tela inicial do Nutra)
+        function showNutraSelection() {
+            document.getElementById('nutra-format-selection').classList.remove('content-hidden');
+            document.getElementById('nutra-products-grid').classList.add('content-hidden');
+            
+            document.getElementById('nutra-title').textContent = 'Linha Nutracêutica Premium';
+            document.getElementById('nutra-subtitle').textContent = 'Selecione o formato de produto desejado para ver as opções disponíveis.';
+        }
+
+        // 3. Mostra o catálogo de produtos Nutra ao clicar no formato
+        function selectNutraFormat(format) {
+            document.getElementById('nutra-format-selection').classList.add('content-hidden');
+            document.getElementById('nutra-products-grid').classList.remove('content-hidden');
+
+            document.getElementById('nutra-title').textContent = `Nutracêuticos: Catálogo de ${format} (Premium)`;
+            document.getElementById('nutra-subtitle').textContent = 'Preços por unidade de pote com sua marca, conforme o volume selecionado.';
+            
+            // GERA OS CARDS COM OS DADOS FILTRADOS POR FORMATO
+            generateNutraCards(format);
+            
+            // Reinicia a lógica de preço para os cards gerados
+            initPriceLogic();
+        }
+
+        /* --- FUNÇÃO PRINCIPAL DE NAVEGAÇÃO ENTRE SEÇÕES --- */
+        function showSection(sectionId) {
+            const wrapper = document.getElementById('content-wrapper');
+            const sections = [
+                document.getElementById('cosmetics-section'),
+                document.getElementById('fitoterapicos-section'),
+                document.getElementById('nutraceuticos-section')
+            ];
+            const targetSection = document.getElementById(sectionId);
+
+            // 1. Torna o content-wrapper visível
+            wrapper.classList.remove('content-hidden');
+
+            // 2. Esconde todas as secções de conteúdo
+            sections.forEach(section => {
+                if (section) {
+                    section.classList.add('content-hidden');
+                }
+            });
+
+            // 3. Mostra apenas a secção desejada
+            if (targetSection) {
+                targetSection.classList.remove('content-hidden');
+
+                // Lógica de sub-navegação: mostra a seleção de formato primeiro.
+                if (sectionId === 'fitoterapicos-section') {
+                    showFitoSelection();
+                } else if (sectionId === 'nutraceuticos-section') {
+                    showNutraSelection();
+                }
+
+                // 4. Rola suavemente para a secção
+                setTimeout(() => {
+                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
+        }
     </script>
 </body>
 </html>
