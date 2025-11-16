@@ -43,6 +43,22 @@
             text-fill-color: transparent;
         }
 
+        /* --- EFEITO DE SLIDE DO RODAPÉ --- */
+        footer {
+            transition: all 0.5s ease-in-out;
+        }
+        .footer-collapsed {
+            height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            overflow: hidden;
+            margin-top: 0;
+            border-top-width: 0;
+        }
+        /* --- FIM DO EFEITO DE SLIDE --- */
+
+
         /* --- FUNDO PREMIUM PARA OS CABEÇALHOS DOS CARDS (Clean/White/Gray-50) --- */
         /* ATUALIZADO: Tema escuro para cabeçalhos de card */
         .card-header-bg {
@@ -417,7 +433,24 @@
                     </div>
                 </div>
 
+            </div> <!-- Fim do grid dos cards de categoria -->
+
+            <!-- ATUALIZADO: Conteúdo do rodapé duplicado aqui -->
+            <div class="mt-16 text-gray-300">
+                <div class="container mx-auto max-w-6xl px-6 text-center text-sm">
+                    <p class="font-bold text-white mb-2">Ultracaps Brasil LTDA</p>
+                    <p>Av. Carneiro Leão, 563 – Zona 01, Maringá – PR — CEP 87014-010</p>
+                    <div class="my-2 space-x-4">
+                        <a href="tel:+5544988035261" class="hover:text-blue-400 transition-colors">(44) 98803-5261</a>
+                        <span>|</span>
+                        <a href="mailto:contato@ultracapsbrasil.com.br" class="hover:text-blue-400 transition-colors">contato@ultracapsbrasil.com.br</a>
+                    </div>
+                    <a href="https://www.ultracapsbrasil.com.br" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">
+                        www.ultracapsbrasil.com.br
+                    </a>
+                </div>
             </div>
+
         </div>
     </header>
 
@@ -1077,7 +1110,8 @@
 
         <!-- FOOTER (Compartilhado pelas três secções) -->
         <!-- ATUALIZADO: Fundo azul-escuro (bg-slate-900) e texto claro (text-gray-300) para alinhar ao branding -->
-        <footer class="bg-slate-900 text-gray-300 py-10 mt-16 border-t border-slate-700">
+        <!-- ATUALIZADO: Adicionado id="footer" e class="footer-collapsed" para o efeito de slide -->
+        <footer id="footer" class="bg-slate-900 text-gray-300 py-10 mt-16 border-t border-slate-700 footer-collapsed">
             <!-- Tagline Section --><div class="text-center px-6 mb-8">
                 <!-- ATUALIZADO: Cor da tagline para branco -->
                 <p class="text-2xl font-semibold italic text-white">
@@ -1115,6 +1149,7 @@
                 document.getElementById('nutraceuticos-section')
             ];
             const targetSection = document.getElementById(sectionId);
+            const footer = document.getElementById('footer'); // ATUALIZADO: Pega o footer
 
             wrapper.classList.remove('content-hidden');
             sections.forEach(section => {
@@ -1123,6 +1158,7 @@
 
             if (targetSection) {
                 targetSection.classList.remove('content-hidden');
+                footer.classList.remove('footer-collapsed'); // ATUALIZADO: Expande o footer
                 if (sectionId === 'fitoterapicos-section') {
                     showFitoSelection();
                 } else if (sectionId === 'nutraceuticos-section') {
@@ -1526,13 +1562,13 @@
 
                 html += `
                     <!-- CARD ${index + 1}: ${product.name.toUpperCase()} -->
-                    <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-700" data-product-card-id="${product.name.replace(/[^a-zA-Z0-9]/g, '-')}">
+                    <div class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-700" data-product-card-id="${product.name.replace(/[^a-zA-Z0-9]/g, '-')})}">
                         <div class="p-6 ${headerClass}">
                             <div class="flex items-center justify-between">
                                 <h2 class="text-xl font-bold ${textClass}">${product.name.toUpperCase()}</h2>
                                 <i data-lucide="${product.icon}" class="w-10 h-10 ${textClass} opacity-80"></i>
                             </div>
-                            <!-- CORREÇÃO DO BUG: 'classs' para 'class' -->
+                            <!-- CORREÇÃO DO BUG: 'classs' ou 'classReal' para 'class' -->
                             <div class="card-header-content"> 
                                 <p class="text-sm text-gray-400 mt-1">${product.subtitle.split('. ').map(s => `<span>${s}</span>`).join('<br>')}</p>
                             </div>
