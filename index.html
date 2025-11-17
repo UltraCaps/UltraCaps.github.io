@@ -58,6 +58,20 @@
         }
         /* --- FIM DO EFEITO DE SLIDE --- */
 
+        /* --- ATUALIZADO: EFEITO DE FADE-IN/FADE-OUT --- */
+        /* Classe base para seções que podem sumir/aparecer */
+        .page-section {
+            transition: opacity 0.4s ease-in-out, transform 0.4s ease-in-out;
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Classe de estado para sumir */
+        .is-fading-out {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        /* --- FIM DO EFEITO DE FADE --- */
+
 
         /* --- FUNDO PREMIUM PARA OS CABEÇALHOS DOS CARDS (Clean/White/Gray-50) --- */
         /* ATUALIZADO: Tema escuro para cabeçalhos de card */
@@ -436,7 +450,8 @@
             </div> <!-- Fim do grid dos cards de categoria -->
 
             <!-- ATUALIZADO: Adicionando Ideia 1 e 3 para preencher o espaço -->
-            <div id="header-footer-content" class="mt-16 text-gray-300">
+            <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-out -->
+            <div id="header-footer-content" class="mt-16 text-gray-300 page-section">
                 <!-- Ideia 3: Tagline -->
                 <div class="text-center px-6 mb-8">
                     <p class="text-2xl font-semibold italic text-white">
@@ -464,7 +479,9 @@
 
     <!-- CONTEÚDO PRINCIPAL (INICIALMENTE ESCONDIDO) --><div id="content-wrapper" class="content-hidden">
         
-        <!-- SECÇÃO 1: CATÁLOGO DE COSMÉTICOS (ATUALIZADO) --><div id="cosmetics-section" class="content-hidden pt-8">
+        <!-- SECÇÃO 1: CATÁLOGO DE COSMÉTICOS (ATUALIZADO) -->
+        <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in -->
+        <div id="cosmetics-section" class="content-hidden pt-8 page-section">
             <main class="container mx-auto max-w-5xl p-6 md:p-12">
                 
                 <!-- ATUALIZADO: Cor do título da seção para branco -->
@@ -755,7 +772,9 @@
         </div>
 
 
-        <!-- SECÇÃO 2: CATÁLOGO DE FITOTERÁPICOS (ATUALIZADO) --><div id="fitoterapicos-section" class="content-hidden pt-8">
+        <!-- SECÇÃO 2: CATÁLOGO DE FITOTERÁPICOS (ATUALIZADO) -->
+        <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in -->
+        <div id="fitoterapicos-section" class="content-hidden pt-8 page-section">
             <div class="max-w-7xl mx-auto p-6 sm:p-8 md:p-12">
                 <header class="text-center mb-12">
                     <!-- ATUALIZADO: Cores do Título -->
@@ -763,7 +782,9 @@
                     <p id="fito-subtitle" class="mt-3 text-lg text-gray-400">Extratos Vegetais e Fórmulas Puras para Saúde e Bem-Estar</p>
                 </header>
 
-                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados - Única opção) --><div id="fito-format-selection">
+                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados - Única opção) -->
+                <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in/out -->
+                <div id="fito-format-selection" class="page-section">
                     <h2 class="text-xl md:text-2xl font-bold text-white mb-8 uppercase text-center">Selecione o formato de produto</h2>
                     <div class="flex justify-center max-w-md mx-auto">
                         
@@ -785,7 +806,9 @@
                     </div>
                 </div>
 
-                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS (ATUALIZADO) --><div id="fito-products-grid" class="content-hidden pt-8">
+                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS (ATUALIZADO) -->
+                <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in/out -->
+                <div id="fito-products-grid" class="content-hidden pt-8 page-section">
                     <!-- ATUALIZADO: Cor do botão voltar -->
                     <button onclick="showFitoSelection()" class="mb-6 text-blue-500 hover:text-blue-400 flex items-center font-semibold transition-colors">
                         <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
@@ -997,7 +1020,9 @@
             </div>
         </div>
         
-        <!-- SECÇÃO 3: CATÁLOGO DE NUTRACÊUTICOS (ATUALIZADO) --><div id="nutraceuticos-section" class="content-hidden pt-8">
+        <!-- SECÇÃO 3: CATÁLOGO DE NUTRACÊUTICOS (ATUALIZADO) -->
+        <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in -->
+        <div id="nutraceuticos-section" class="content-hidden pt-8 page-section">
             <div class="max-w-7xl mx-auto p-6 sm:p-8 md:p-12">
                 <header class="text-center mb-12">
                     <!-- ATUALIZADO: Cores do Título -->
@@ -1005,7 +1030,9 @@
                     <p id="nutra-subtitle" class="mt-3 text-lg text-gray-400">Selecione o formato de produto desejado para ver as opções disponíveis.</p>
                 </header>
 
-                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados, Pó, Gotas, Gummy) --><div id="nutra-format-selection">
+                <!-- SUB-SEÇÃO 1: SELEÇÃO DE FORMATO (Encapsulados, Pó, Gotas, Gummy) -->
+                <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in/out -->
+                <div id="nutra-format-selection" class="page-section">
                     <h2 class="text-xl md:text-2xl font-bold text-white mb-8 uppercase text-center">Selecione o formato de produto</h2>
                     <!-- ATUALIZADO: md:grid-cols-4 e max-w-5xl para centralizar 4 itens -->
                     <div class="grid grid-cols-2 gap-8 md:grid-cols-4 max-w-5xl mx-auto">
@@ -1069,7 +1096,9 @@
                     </div>
                 </div>
 
-                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS NUTRACÊUTICOS (GERADO DINAMICAMENTE) --><div id="nutra-products-grid" class="content-hidden pt-8">
+                <!-- SUB-SEÇÃO 2: CATÁLOGO DE PRODUTOS NUTRACÊUTICOS (GERADO DINAMICAMENTE) -->
+                <!-- ATUALIZADO: Adicionada classe 'page-section' para o fade-in/out -->
+                <div id="nutra-products-grid" class="content-hidden pt-8 page-section">
                     <!-- ATUALIZADO: Cor do botão voltar -->
                     <button onclick="showNutraSelection()" class="mb-6 text-blue-500 hover:text-blue-400 flex items-center font-semibold transition-colors">
                         <i data-lucide="arrow-left" class="w-4 h-4 mr-2"></i>
@@ -1147,6 +1176,29 @@
 
     <script>
         // --- FUNÇÕES DE NAVEGAÇÃO INTERNA ---
+
+        // --- ATUALIZADO: Funções de Fade-in/Fade-out ---
+        function fadeOutAndHide(el) {
+            if (!el || el.classList.contains('content-hidden')) return;
+            el.classList.add('is-fading-out');
+            setTimeout(() => {
+                el.classList.add('content-hidden');
+                el.classList.remove('is-fading-out'); // Reset for next time
+            }, 400); // Match CSS transition duration
+        }
+
+        function showAndFadeIn(el) {
+            if (!el) return;
+            el.classList.add('is-fading-out'); // Start at opacity 0
+            el.classList.remove('content-hidden'); // Make it display: block
+            
+            // Force a reflow (browser trick) before transitioning opacity
+            void el.offsetWidth; 
+
+            setTimeout(() => { // Short delay to ensure it renders
+                el.classList.remove('is-fading-out'); // Fade in
+            }, 10);
+        }
         
         /* --- FUNÇÃO PRINCIPAL DE NAVEGAÇÃO ENTRE SEÇÕES --- */
         function showSection(sectionId) {
@@ -1160,62 +1212,81 @@
             const footer = document.getElementById('footer'); // ATUALIZADO: Pega o footer
             const headerFooter = document.getElementById('header-footer-content'); // ATUALIZADO: Pega o footer do header
 
-            wrapper.classList.remove('content-hidden');
+            // ATUALIZADO: Usa fadeOutAndHide
             sections.forEach(section => {
-                if (section) section.classList.add('content-hidden');
-            });
-
-            if (targetSection) {
-                targetSection.classList.remove('content-hidden');
-                footer.classList.remove('footer-collapsed'); // ATUALIZADO: Expande o footer
-                if (headerFooter) headerFooter.classList.add('content-hidden'); // ATUALIZADO: Esconde o footer do header
-
-                if (sectionId === 'fitoterapicos-section') {
-                    showFitoSelection();
-                } else if (sectionId === 'nutraceuticos-section') {
-                    showNutraSelection();
+                if (section && !section.classList.contains('content-hidden')) {
+                    fadeOutAndHide(section);
                 }
-                setTimeout(() => {
-                    targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 100);
-            }
+            });
+            if (headerFooter) fadeOutAndHide(headerFooter);
+
+            // Atraso para o fade-in começar após o fade-out
+            setTimeout(() => {
+                wrapper.classList.remove('content-hidden'); // Mostra o container principal
+                
+                if (targetSection) {
+                    showAndFadeIn(targetSection); // ATUALIZADO: Usa showAndFadeIn
+                    footer.classList.remove('footer-collapsed'); // ATUALIZADO: Expande o footer
+                    
+                    if (sectionId === 'fitoterapicos-section') {
+                        showFitoSelection(); // Isso agora só gerencia o conteúdo *interno*
+                    } else if (sectionId === 'nutraceuticos-section') {
+                        showNutraSelection(); // Isso agora só gerencia o conteúdo *interno*
+                    }
+                    setTimeout(() => {
+                        targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }, 100); // Scroll após o conteúdo começar a aparecer
+                }
+            }, 400); // Deve corresponder ao tempo do fadeOut
         }
         
         /* --- NAVEGAÇÃO FITOTERÁPICA --- */
         function showFitoSelection() {
-            document.getElementById('fito-format-selection').classList.remove('content-hidden');
-            document.getElementById('fito-products-grid').classList.add('content-hidden');
+            // ATUALIZADO: Usa fadeOutAndHide/showAndFadeIn
+            fadeOutAndHide(document.getElementById('fito-products-grid'));
+            showAndFadeIn(document.getElementById('fito-format-selection'));
+            
             document.getElementById('fito-title').textContent = 'Linha Fitoterápica Natural';
             document.getElementById('fito-subtitle').textContent = 'Extratos Vegetais e Fórmulas Puras para Saúde e Bem-Estar';
         }
 
         function selectFitoFormat(format) {
             if (format === 'Encapsulados') {
-                document.getElementById('fito-format-selection').classList.add('content-hidden');
-                document.getElementById('fito-products-grid').classList.remove('content-hidden');
-                document.getElementById('fito-title').textContent = `Fitoterápicos: ${format} Premium`;
-                document.getElementById('fito-subtitle').textContent = 'Selecione a dose desejada abaixo.';
-                initPriceLogic(); // Inicia lógica de preço para cards estáticos
+                // ATUALIZADO: Usa fadeOutAndHide/showAndFadeIn
+                fadeOutAndHide(document.getElementById('fito-format-selection'));
+
+                setTimeout(() => {
+                    showAndFadeIn(document.getElementById('fito-products-grid'));
+                    document.getElementById('fito-title').textContent = `Fitoterápicos: ${format} Premium`;
+                    document.getElementById('fito-subtitle').textContent = 'Selecione a dose desejada abaixo.';
+                    initPriceLogic(); // Inicia lógica de preço para cards estáticos
+                }, 400);
             }
         }
 
         /* --- NAVEGAÇÃO NUTRACÊUTICA --- */
         function showNutraSelection() {
-            document.getElementById('nutra-format-selection').classList.remove('content-hidden');
-            document.getElementById('nutra-products-grid').classList.add('content-hidden');
+            // ATUALIZADO: Usa fadeOutAndHide/showAndFadeIn
+            fadeOutAndHide(document.getElementById('nutra-products-grid'));
+            showAndFadeIn(document.getElementById('nutra-format-selection'));
+            
             document.getElementById('nutra-title').textContent = 'Linha Nutracêutica Premium';
             document.getElementById('nutra-subtitle').textContent = 'Selecione o formato de produto desejado para ver as opções disponíveis.';
         }
 
         function selectNutraFormat(format) {
-            document.getElementById('nutra-format-selection').classList.add('content-hidden');
-            document.getElementById('nutra-products-grid').classList.remove('content-hidden');
-            document.getElementById('nutra-title').textContent = `Nutracêuticos: Catálogo de ${format} (Premium)`;
-            document.getElementById('nutra-subtitle').textContent = 'Preços por unidade de pote com sua marca, conforme o volume selecionado.';
-            
-            generateNutraCards(format);
-            initPriceLogic(); // Inicia lógica de preço para cards dinâmicos
-            initMultiStepLogic(); // Inicia lógica de multi-passo (Creatina)
+            // ATUALIZADO: Usa fadeOutAndHide/showAndFadeIn
+            fadeOutAndHide(document.getElementById('nutra-format-selection'));
+
+            setTimeout(() => {
+                showAndFadeIn(document.getElementById('nutra-products-grid'));
+                document.getElementById('nutra-title').textContent = `Nutracêuticos: Catálogo de ${format} (Premium)`;
+                document.getElementById('nutra-subtitle').textContent = 'Preços por unidade de pote com sua marca, conforme o volume selecionado.';
+                
+                generateNutraCards(format);
+                initPriceLogic(); // Inicia lógica de preço para cards dinâmicos
+                initMultiStepLogic(); // Inicia lógica de multi-passo (Creatina)
+            }, 400);
         }
 
         // --- DADOS DOS PRODUTOS NUTRACÊUTICOS (TODAS AS ALTERAÇÕES APLICADAS) ---
@@ -1579,7 +1650,7 @@
                                 <h2 class="text-xl font-bold ${textClass}">${product.name.toUpperCase()}</h2>
                                 <i data-lucide="${product.icon}" class="w-10 h-10 ${textClass} opacity-80"></i>
                             </div>
-                            <!-- CORREÇÃO DO BUG: 'classReal' ou 'classD' para 'class' -->
+                            <!-- CORREÇÃO DO BUG: 'classD' para 'class' -->
                             <div class="card-header-content"> 
                                 <p class="text-sm text-gray-400 mt-1">${product.subtitle.split('. ').map(s => `<span>${s}</span>`).join('<br>')}</p>
                             </div>
