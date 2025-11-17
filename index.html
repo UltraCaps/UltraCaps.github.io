@@ -367,7 +367,7 @@
             <!-- ATUALIZADO: Trocado 'flex flex-wrap' por 'grid sm:grid-cols-3' -->
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
                 
-                <!-- Cartão 1: Fitoterápicos (ATUALIZADO PARA TEMA PRETO/AZUL) -->
+                <!-- Cartão 1: Fitoterápicos (ATUALIZADO PARA TEMA AZUL) -->
                 <div class="product-card w-full p-6 rounded-xl 
                     border border-slate-700 
                     bg-slate-800 
@@ -389,7 +389,7 @@
                     </div>
                 </div>
 
-                <!-- Cartão 2: Nutracêuticos (ATUALIZADO PARA TEMA PRETO/AZUL) -->
+                <!-- Cartão 2: Nutracêuticos (ATUALIZADO PARA TEMA AZUL) -->
                 <div class="product-card w-full p-6 rounded-xl 
                     border border-slate-700 
                     bg-slate-800 
@@ -411,7 +411,7 @@
                     </div>
                 </div>
 
-                <!-- Cartão 3: COSMÉTICOS (ATUALIZADO PARA TEMA PRETO/AZUL) -->
+                <!-- Cartão 3: COSMÉTICOS (ATUALIZADO PARA TEMA AZUL) -->
                 <div class="product-card w-full p-6 rounded-xl 
                     border border-slate-700 
                     bg-slate-800 
@@ -435,7 +435,29 @@
 
             </div> <!-- Fim do grid dos cards de categoria -->
 
-            <!-- ATUALIZADO: Conteúdo duplicado do rodapé REMOVIDO daqui -->
+            <!-- ATUALIZADO: Adicionando Ideia 1 e 3 para preencher o espaço -->
+            <div id="header-footer-content" class="mt-16 text-gray-300">
+                <!-- Ideia 3: Tagline -->
+                <div class="text-center px-6 mb-8">
+                    <p class="text-2xl font-semibold italic text-white">
+                        “Excelência e inovação em cada fórmula — Ultracaps Brasil.”
+                    </p>
+                </div>
+                <!-- Ideia 1: Contact Info -->
+                <div class="container mx-auto max-w-6xl px-6 text-center text-sm">
+                    <p class="font-bold text-white mb-2">Ultracaps Brasil LTDA</p>
+                    <p>Av. Carneiro Leão, 563 – Zona 01, Maringá – PR — CEP 87014-010</p>
+                    <div class="my-2 space-x-4">
+                        <a href="tel:+5544988035261" class="hover:text-blue-400 transition-colors">(44) 98803-5261</a>
+                        <span>|</span>
+                        <a href="mailto:contato@ultracapsbrasil.com.br" class="hover:text-blue-400 transition-colors">contato@ultracapsbrasil.com.br</a>
+                    </div>
+                    <a href="https://www.ultracapsbrasil.com.br" target="_blank" rel="noopener noreferrer" class="font-semibold text-white hover:text-blue-400 transition-colors">
+                        www.ultracapsbrasil.com.br
+                    </a>
+                </div>
+            </div>
+            <!-- Fim da adição -->
 
         </div>
     </header>
@@ -771,7 +793,7 @@
                     </button>
                     <!-- TÍTULOS SÃO ATUALIZADOS NA FUNÇÃO selectFitoFormat() -->
                     <!-- ATUALIZADO: Trocado 'md:grid-cols-3' por 'sm:grid-cols-3' para 3 colunas aparecerem mais cedo -->
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                         
                         <!-- 1. Emagrecedor --><div class="bg-slate-800 rounded-2xl overflow-hidden shadow-lg border border-slate-700">
                             <div class="p-6 card-header-bg">
@@ -1065,7 +1087,7 @@
                     
                     <!-- CONTAINER ONDE OS CARDS SERÃO INJETADOS PELO JS -->
                     <!-- ATUALIZADO: Trocado 'md:grid-cols-3' por 'sm:grid-cols-3' para 3 colunas aparecerem mais cedo -->
-                    <div id="nutra-cards-container" class="grid grid-cols-2 sm:grid-cols-3 gap-8">
+                    <div id="nutra-cards-container" class="grid grid-cols-1 sm:grid-cols-3 gap-8">
                         <!-- Cards injetados aqui --></div>
                 </div>
 
@@ -1136,6 +1158,7 @@
             ];
             const targetSection = document.getElementById(sectionId);
             const footer = document.getElementById('footer'); // ATUALIZADO: Pega o footer
+            const headerFooter = document.getElementById('header-footer-content'); // ATUALIZADO: Pega o footer do header
 
             wrapper.classList.remove('content-hidden');
             sections.forEach(section => {
@@ -1145,6 +1168,8 @@
             if (targetSection) {
                 targetSection.classList.remove('content-hidden');
                 footer.classList.remove('footer-collapsed'); // ATUALIZADO: Expande o footer
+                if (headerFooter) headerFooter.classList.add('content-hidden'); // ATUALIZADO: Esconde o footer do header
+
                 if (sectionId === 'fitoterapicos-section') {
                     showFitoSelection();
                 } else if (sectionId === 'nutraceuticos-section') {
@@ -1554,7 +1579,7 @@
                                 <h2 class="text-xl font-bold ${textClass}">${product.name.toUpperCase()}</h2>
                                 <i data-lucide="${product.icon}" class="w-10 h-10 ${textClass} opacity-80"></i>
                             </div>
-                            <!-- CORREÇÃO DO BUG: 'classReal' para 'class' -->
+                            <!-- CORREÇÃO DO BUG: 'classReal' ou 'classD' para 'class' -->
                             <div class="card-header-content"> 
                                 <p class="text-sm text-gray-400 mt-1">${product.subtitle.split('. ').map(s => `<span>${s}</span>`).join('<br>')}</p>
                             </div>
