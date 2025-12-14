@@ -815,33 +815,41 @@
 
             return (
                 <div className="fixed top-0 left-0 w-full z-[100] bg-gradient-to-r from-red-900 via-red-600 to-orange-600 shadow-2xl border-b border-white/10 animate-fade-in-down">
-                    {/* Padding reduzido no mobile (py-1.5) e layout ajustado */}
-                    <div className="relative flex flex-col md:flex-row items-center justify-center py-1.5 px-3 md:py-2 md:px-8 gap-1.5 md:gap-2 text-center">
+                    {/* Padding ultra reduzido no mobile e layout ajustado */}
+                    <div className="relative flex flex-col md:flex-row items-center justify-center py-2 px-2 md:py-2 md:px-8 gap-1 md:gap-2 text-center">
                         
-                        {/* Texto de Impacto */}
-                        <div className="flex flex-col md:flex-row items-center gap-0.5 md:gap-3 text-white">
-                            <div className="flex items-center gap-1.5 md:gap-2 justify-center">
+                        {/* Texto de Impacto - VERSÃO MOBILE (Curta) e DESKTOP (Longa) */}
+                        <div className="flex flex-col md:flex-row items-center text-white">
+                            <div className="flex items-center justify-center gap-2">
                                 <div className="bg-white/20 p-1 md:p-1.5 rounded-full animate-pulse hidden md:block">
                                     <Icons.Zap size={14} className="text-yellow-300 fill-yellow-300" />
                                 </div>
-                                <span className="text-[10px] leading-tight md:text-sm font-medium tracking-wide max-w-[280px] md:max-w-none">
-                                    Garanta o <span className="font-bold border-b border-white/40 mx-0.5">Plano Premium (12 Meses)</span> com <span className="font-black text-yellow-300 text-xs md:text-lg mx-0.5 drop-shadow-md">30% OFF</span>
+                                
+                                {/* Texto Desktop */}
+                                <span className="hidden md:inline text-sm font-medium tracking-wide">
+                                    Garanta o <span className="font-bold border-b border-white/40 mx-1">Plano Premium (12 Meses)</span> com <span className="font-black text-yellow-300 text-lg mx-1 drop-shadow-md">30% OFF</span>
+                                </span>
+
+                                {/* Texto Mobile (Otimizado para não quebrar linha) */}
+                                <span className="md:hidden text-xs font-medium tracking-wide flex items-center">
+                                    <Icons.Zap size={12} className="text-yellow-300 fill-yellow-300 mr-1" />
+                                    Premium 12x com <span className="font-black text-yellow-300 text-sm ml-1">30% OFF</span>
                                 </span>
                             </div>
                         </div>
 
                         {/* Linha Inferior Mobile: Data + Cupom */}
-                        <div className="flex items-center gap-2 md:gap-3">
-                            <span className="text-[9px] md:text-xs font-bold bg-black/20 px-1.5 py-0.5 rounded text-red-100 border border-white/10 flex items-center whitespace-nowrap">
+                        <div className="flex items-center gap-2 md:gap-3 mt-0.5 md:mt-0">
+                            <span className="text-[10px] md:text-xs font-bold bg-black/20 px-1.5 py-0.5 rounded text-red-100 border border-white/10 flex items-center whitespace-nowrap">
                                 ⏳ Até 05/Jan
                             </span>
 
                             {/* Área do Cupom Compacta */}
                             <div 
                                 onClick={handleCopy}
-                                className="flex items-center group cursor-pointer bg-black/30 hover:bg-black/50 border border-white/20 hover:border-yellow-400/50 rounded-full pl-2 pr-1.5 py-0.5 md:pl-3 md:pr-2 md:py-1 transition-all duration-300 transform hover:scale-105 active:scale-95"
+                                className="flex items-center group cursor-pointer bg-black/30 hover:bg-black/50 border border-white/20 hover:border-yellow-400/50 rounded-full pl-2 pr-1.5 py-0.5 md:pl-3 md:pr-2 md:py-1 transition-all duration-300 active:scale-95"
                             >
-                                <span className="text-[9px] md:text-[10px] text-gray-300 font-bold mr-1.5 uppercase tracking-wider">Cupom:</span>
+                                <span className="text-[10px] text-gray-300 font-bold mr-1 uppercase tracking-wider">Cupom:</span>
                                 <span className="font-mono text-xs md:text-base font-black text-white tracking-widest mr-1.5 group-hover:text-yellow-300 transition-colors">30off</span>
                                 <div className="bg-white/10 p-0.5 md:p-1 rounded-full group-hover:bg-white/20 transition-colors">
                                     {copied ? <Icons.CheckCircle size={10} className="text-green-400" /> : <Icons.Copy size={10} className="text-white" />}
@@ -944,8 +952,8 @@
                     </div>
 
                     {/* Navigation - Novo Estilo Cápsula com Pouco Blur */}
-                    {/* Ajuste dinâmico: Aumentei para pt-28 no mobile quando o banner está ativo para evitar sobreposição */}
-                    <div className={`fixed w-full flex justify-center px-4 z-50 transition-all duration-500 ease-in-out ${showBanner ? 'pt-28 md:pt-24' : 'pt-6'}`}>
+                    {/* Ajuste dinâmico: Aumentado para pt-32 no mobile para garantir que não cubra */}
+                    <div className={`fixed w-full flex justify-center px-4 z-50 transition-all duration-500 ease-in-out ${showBanner ? 'pt-32 md:pt-24' : 'pt-6'}`}>
                         <nav className="bg-black/40 backdrop-blur-sm border border-white/10 rounded-full px-6 py-3 flex items-center justify-between w-full max-w-5xl shadow-2xl transition-all duration-300 hover:bg-black/60 pointer-events-auto">
                             {/* Logo */}
                             <div className="flex items-center gap-2">
